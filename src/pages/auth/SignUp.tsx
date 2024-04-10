@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
 import AuthModal from '@/components/shared/auth/AuthModal';
 import movieIcon from '@/assets/logo.svg';
 import { Button } from '@/components/ui/Button';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import AuthContext from '@/context/AuthContext';
 import OAuth from '@/components/shared/auth/OAuth';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import Spinner from '@/assets/spinner.svg?react';
+import { useAuth } from '@/hooks/useAuth';
 
 function SignUp() {
   interface FormData {
@@ -40,7 +39,7 @@ function SignUp() {
   });
   const [submitted, setSubmitted] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-  const { signUp } = useContext(AuthContext);
+  const { signUp } = useAuth();
   const { email, password } = formData;
 
   function validateForm() {

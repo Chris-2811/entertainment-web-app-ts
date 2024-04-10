@@ -1,15 +1,14 @@
 /// <reference types="vite-plugin-svgr/client" />
-import React, { useContext, useState } from 'react';
+import { useState } from 'react';
+import * as React from 'react';
 import AuthModal from '@/components/shared/auth/AuthModal';
 import movieIcon from '@/assets/logo.svg';
 import { Button } from '@/components/ui/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthContext from '@/context/AuthContext';
 import OAuth from '@/components/shared/auth/OAuth';
 import Spinner from '@/assets/spinner.svg?react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-
-console.log(typeof Spinner);
+import { useAuth } from '@/hooks/useAuth';
 
 interface FormData {
   email: string;
@@ -37,7 +36,8 @@ function LogIn() {
   });
   const [submitted, setSubmitted] = useState<boolean>(true);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { logIn } = useContext(AuthContext);
+
+  const { logIn } = useAuth();
 
   const { email, password } = formData;
   const navigate = useNavigate();
