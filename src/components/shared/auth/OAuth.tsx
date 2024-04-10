@@ -1,10 +1,5 @@
-import React from 'react';
 import { auth } from '@/lib/firebase/firebase';
-import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  GithubAuthProvider,
-} from 'firebase/auth';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import googleIcon from '@/assets/icon-google.svg';
 import githubIcon from '@/assets/icon-github.png';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -19,6 +14,13 @@ function OAuth() {
       const result = await signInWithPopup(auth, provider);
       console.log(result);
       navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function onGithubClick() {
+    try {
     } catch (error) {
       console.log(error);
     }
@@ -39,7 +41,7 @@ function OAuth() {
           />
         </div>
         <div
-          onClick={onGoogleClick}
+          onClick={onGithubClick}
           className="bg-white w-[3.25rem] h-[3.25rem] grid place-items-center my-4 rounded-full cursor-pointer "
         >
           <img src={githubIcon} alt="github-icon" />

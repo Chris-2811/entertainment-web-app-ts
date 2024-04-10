@@ -1,5 +1,3 @@
-import { Button } from '@/components/ui/Button';
-import Searchbar from '@/components/shared/main/Searchbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home, Movies, Shows, Bookmarked, LogIn, SignUp } from '@/pages/index';
 import MainLayout from './layout/MainLayout';

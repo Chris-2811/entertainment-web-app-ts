@@ -4,9 +4,10 @@ import movieIcon from '@/assets/logo.svg';
 import { Button } from '@/components/ui/Button';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { auth } from 'firebase/auth';
 import AuthContext from '@/context/AuthContext';
 import OAuth from '@/components/shared/auth/OAuth';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import Spinner from '@/assets/spinner.svg?react';
 
 function SignUp() {
   interface FormData {
@@ -37,7 +38,8 @@ function SignUp() {
     password: '',
     password2: '',
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
   const { signUp } = useContext(AuthContext);
   const { email, password } = formData;
 
@@ -60,6 +62,15 @@ function SignUp() {
     if (!formData.password) {
       isValid = false;
       newErrors.password = "can't be empty";
+    } else if (formData.password.length < 6) {
+      isValid = false;
+      newErrors.password = 'Password must be at least 6 characters';
+    } else if (formData.password.length > 128) {
+      isValid = false;
+      newErrors.password = 'Password must be at most 128 characters';
+    } else if (formData.password !== formData.password2) {
+      isValid = false;
+      newErrors.password = 'Passwords do not match';
     } else {
       newErrors.password = '';
     }
@@ -71,7 +82,7 @@ function SignUp() {
       newErrors.password2 = '';
     }
 
-    setErrors(newErrors);
+    setErrors(newErrors as Errors);
     return isValid;
   }
 
@@ -130,7 +141,7 @@ function SignUp() {
           </div>
           <div className="input-control flex items-center pb-4 md:pb-[1.125rem] pt-6 border-b border-b-greyish-blue ">
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               name="password"
               id="password"
               placeholder="Password"
@@ -139,6 +150,19 @@ function SignUp() {
               onChange={handleInputChange}
               value={formData.password}
             />
+            {!errors.password &&
+              (showPassword ? (
+                <FaEyeSlash
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="cursor-pointer text-white mr-4"
+                />
+              ) : (
+                <FaEye
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="cursor-pointer text-white mr-4"
+                />
+              ))}
+
             {errors.password && (
               <div className="flex-shrink-0">
                 <small className="text-red pr-4">{errors.password}</small>
@@ -147,7 +171,7 @@ function SignUp() {
           </div>
           <div className="input-control flex items-center pb-4 md:pb-[1.125rem] pt-6 border-b border-b-greyish-blue ">
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               name="password2"
               id="password2"
               placeholder="Repeat password"
@@ -166,7 +190,17 @@ function SignUp() {
             className="mt-10 md:mt-6
           "
           >
-            <Button>Create an account</Button>
+            <Button>
+              {' '}
+              {!submitted ? (
+                <>
+                  <Spinner className="animate-spin h-5 w-5 mr-3" />
+                  Processing...
+                </>
+              ) : (
+                'Create an account'
+              )}
+            </Button>
           </div>
           <div className="mt-5 md:mt-6">
             <OAuth />

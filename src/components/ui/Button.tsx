@@ -12,7 +12,7 @@ const buttonVariants = cva(
         default:
           'bg-red w-full text-white hover:bg-white hover:text-semi-dark-blue text-[0.875rem]',
         secondary:
-          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+          'text-white bg-transparent border py-2 rounded-md px-6 mt-6 border-red hover:bg-red',
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {

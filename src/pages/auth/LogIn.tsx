@@ -1,11 +1,15 @@
-import React, { FormEvent, useContext, useState } from 'react';
+/// <reference types="vite-plugin-svgr/client" />
+import React, { useContext, useState } from 'react';
 import AuthModal from '@/components/shared/auth/AuthModal';
 import movieIcon from '@/assets/logo.svg';
 import { Button } from '@/components/ui/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '@/context/AuthContext';
-import { Navigate } from 'react-router-dom';
 import OAuth from '@/components/shared/auth/OAuth';
+import Spinner from '@/assets/spinner.svg?react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+
+console.log(typeof Spinner);
 
 interface FormData {
   email: string;
@@ -31,7 +35,8 @@ function LogIn() {
     email: '',
     password: '',
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState<boolean>(true);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const { logIn } = useContext(AuthContext);
 
   const { email, password } = formData;
@@ -60,7 +65,7 @@ function LogIn() {
       newErrors.password = '';
     }
 
-    setErrors(newErrors);
+    setErrors(newErrors as Errors);
     return isValid;
   }
 
@@ -80,10 +85,10 @@ function LogIn() {
     e.preventDefault();
 
     if (validateForm()) {
+      setSubmitted(false);
       setFormData({ email: '', password: '' });
-      setSubmitted(true);
       await logIn(email, password);
-
+      setSubmitted(true);
       navigate('/');
     } else {
       console.log('form is not valid');
@@ -110,6 +115,7 @@ function LogIn() {
               onChange={handleInputChange}
               value={formData.email}
             />
+
             {errors.email && (
               <div className="flex-shrink-0">
                 <small className="text-red pr-4">{errors.email}</small>
@@ -118,7 +124,7 @@ function LogIn() {
           </div>
           <div className="input-control flex items-center pb-4 md:pb-[1.125rem] pt-6 border-b border-b-greyish-blue ">
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               name="password"
               id="password"
               placeholder="Password"
@@ -127,6 +133,18 @@ function LogIn() {
               onChange={handleInputChange}
               value={formData.password}
             />
+            {!errors.password &&
+              (showPassword ? (
+                <FaEyeSlash
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="cursor-pointer text-white mr-4"
+                />
+              ) : (
+                <FaEye
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="cursor-pointer text-white mr-4"
+                />
+              ))}
             {errors.password && (
               <div className="flex-shrink-0">
                 <small className="text-red pr-4">{errors.password}</small>
@@ -137,7 +155,16 @@ function LogIn() {
             className="mt-10
           "
           >
-            <Button>Login to your account</Button>
+            <Button>
+              {!submitted ? (
+                <>
+                  <Spinner className="animate-spin h-5 w-5 mr-3" />
+                  Processing...
+                </>
+              ) : (
+                'Login to your account'
+              )}
+            </Button>
           </div>
           <div className="mt-5 md:mt-6">
             <OAuth />

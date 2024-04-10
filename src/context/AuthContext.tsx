@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
-import firebase from 'firebase/compat/app';
 import { ReactNode } from 'react';
-import { auth, db } from '@/lib/firebase/firebase';
+import { auth } from '@/lib/firebase/firebase';
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -10,7 +9,7 @@ import {
 import { UserCredential, User } from 'firebase/auth';
 
 interface AuthContextValues {
-  user: firebase.User | null;
+  user: User | null;
   signUp: (email: string, password: string) => Promise<UserCredential>;
   logIn: (email: string, password: string) => Promise<UserCredential>;
 }

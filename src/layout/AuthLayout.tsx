@@ -1,4 +1,6 @@
 import { ReactNode } from 'react';
+import { Button } from '@/components/ui/Button';
+import { Link } from 'react-router-dom';
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -7,7 +9,11 @@ interface AuthLayoutProps {
 function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <div>
-      <div className="text-white">This is the AuthLayout</div>
+      <div className="ml-6">
+        <Button asChild variant={'secondary'}>
+          <Link to="/">Go Back</Link>
+        </Button>
+      </div>
       {children}
     </div>
   );
