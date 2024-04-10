@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --------------- */
+/* CSS Reset */
+/* --------------- */
+
+@layer base {
+  /* Box sizing rules */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+  }
+
+  /* Prevent font size inflation */
+  html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+  ul[role='list'],
+  ol[role='list'] {
+    list-style: none;
+  }
+
+  /* Set core body defaults */
+  body {
+    color: #fff;
+    font-size: 0.9375rem;
+    min-height: 100vh;
+    line-height: 1.5;
+    background-color: theme(colors.dark-blue);
+    font-family: theme(fontFamily.sans);
+  }
+
+  button,
+  input,
+  label {
+    line-height: 1.1;
+  }
+
+  /* Balance text wrapping on headings */
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  /* A elements that don't have a class get default styles */
+  a:not([class]) {
+    text-decoration-skip-ink: auto;
+    color: currentColor;
+  }
+
+  /* Make images easier to work with */
+  img,
+  picture {
+    max-width: 100%;
+    display: block;
+  }
+
+  /* Inherit fonts for inputs and buttons */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  /* Make sure textareas without a rows attribute are not tiny */
+  textarea:not([rows]) {
+    min-height: 10em;
+  }
+
+  /* Anything that has been anchored to should have extra scroll margin */
+  :target {
+    scroll-margin-block: 5ex;
+  }
+
+  /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+  @media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #fff !important;
+  }
+
+  /* Typography */
+}
+
+@layer components {
+  .container {
+    @apply px-6 md:px-0;
+  }
+}
+
+@layer utilities {
+  /* Typography */
+
+  .heading-lg {
+    color: #fff;
+    font-family: Outfit, sans-serif;
+    font-size: 1.125rem;
+    letter-spacing: -0.312px;
+  }
+
+  .heading-md {
+    color: #fff;
+    font-size: 0.9375rem;
+  }
+
+  .heading-sm {
+    color: #fff;
+    font-size: 0.875rem;
+  }
+
+  .text-primary {
+    color: #fff;
+    font-size: 0.6875rem;
+    opacity: 0.75;
+  }
+
+  @media screen and (md) {
+    .heading-lg {
+      font-size: 2rem;
+      letter-spacing: -0.5px;
+    }
+
+    .heading-md {
+      font-size: 1.5rem;
+    }
+
+    .heading-sm {
+      color: #fff;
+      font-size: 1.125rem;
+    }
+
+    .text-primary {
+      font-size: 0.8125rem;
+    }
+  }
+}
