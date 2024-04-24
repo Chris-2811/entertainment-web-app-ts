@@ -6,9 +6,8 @@ import movieIcon from '@/assets/logo.svg';
 import { Button } from '@/components/ui/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '@/components/shared/auth/OAuth';
-import Spinner from '@/assets/spinner.svg?react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useAuth } from '@/hooks/useAuth';
+import useAuth from '@/hooks/useAuth';
 
 interface FormData {
   email: string;
@@ -18,6 +17,7 @@ interface FormData {
 interface Errors {
   email: string;
   password: string;
+  message?: string;
 }
 
 interface NewErrors {
@@ -33,8 +33,9 @@ function LogIn() {
   const [errors, setErrors] = useState<Errors>({
     email: '',
     password: '',
+    message: '',
   });
-  const [submitted, setSubmitted] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const { logIn } = useAuth();
@@ -84,21 +85,34 @@ function LogIn() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    setErrors({
+      ...errors,
+      message: '',
+    });
+
     if (validateForm()) {
-      setSubmitted(false);
-      setFormData({ email: '', password: '' });
-      await logIn(email, password);
-      setSubmitted(true);
-      navigate('/');
-    } else {
-      console.log('form is not valid');
-      return;
+      try {
+        setIsLoading(true);
+        setFormData({ email: '', password: '' });
+        await logIn(email, password);
+        navigate('/');
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        const err = error as Error;
+        setErrors({
+          ...errors,
+          message: err.message,
+        });
+      }
     }
+
+    console.log('form is not valid');
   }
 
   return (
     <div className="container mt-12 md:mt-20 lg:mt-[4.875rem]">
-      <Link to="/">
+      <Link to="/" className="">
         <img src={movieIcon} alt="" className="mx-auto" />
       </Link>
 
@@ -122,7 +136,7 @@ function LogIn() {
               </div>
             )}
           </div>
-          <div className="input-control flex items-center pb-4 md:pb-[1.125rem] pt-6 border-b border-b-greyish-blue ">
+          <div className="relative input-control flex items-center pb-4 md:pb-[1.125rem] pt-6 border-b border-b-greyish-blue ">
             <input
               type={showPassword ? 'text' : 'password'}
               name="password"
@@ -150,26 +164,30 @@ function LogIn() {
                 <small className="text-red pr-4">{errors.password}</small>
               </div>
             )}
+            {errors.message ===
+              'Firebase: Error (auth/invalid-credential).' && (
+              <div className="absolute -bottom-7 left-4">
+                <small className="text-red pr-4">Email or Password wrong</small>
+              </div>
+            )}
           </div>
           <div
             className="mt-10
           "
           >
             <Button>
-              {!submitted ? (
-                <>
-                  <Spinner className="animate-spin h-5 w-5 mr-3" />
-                  Processing...
-                </>
-              ) : (
-                'Login to your account'
-              )}
+              {isLoading ? <>Processing...</> : 'Login to your account'}
             </Button>
           </div>
           <div className="mt-5 md:mt-6">
             <OAuth />
           </div>
-          <p className="text-[0.9375rem] text-center mt-5 md:mt-6">
+          <div className=" text-center text-base mt-3">
+            <Link to="/forgot-password" className="text-sm text-white">
+              Forgot Password?
+            </Link>
+          </div>
+          <p className="text-[0.9375rem] text-center mt-2">
             Don't have an account?
             <span className="text-red ml-2 ">
               <Link to="/sign-up">Sign Up</Link>

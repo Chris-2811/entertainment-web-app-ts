@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -35,9 +35,9 @@
   /* Set core body defaults */
   body {
     color: #fff;
-    font-size: 0.9375rem;
     min-height: 100vh;
     line-height: 1.5;
+    font-weight: 300;
     background-color: theme(colors.dark-blue);
     font-family: theme(fontFamily.sans);
   }
@@ -111,12 +111,63 @@
     -webkit-text-fill-color: #fff !important;
   }
 
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
   /* Typography */
 }
 
 @layer components {
   .container {
-    @apply px-6 md:px-0;
+    @apply px-4 md:px-6 lg:px-9 w-full max-w-none;
+  }
+
+  .primary-navigation .active svg path {
+    fill: white;
+  }
+
+  .grid-container-trending {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25rem) minmax(0, 1fr) minmax(1.5rem, 1fr);
+    grid-template-rows: max-content 1fr;
+    grid-template-areas:
+      '. heading .'
+      '. content content';
+  }
+
+  .grid-container-trending > div:first-of-type {
+    grid-area: content;
+  }
+  .grid-container-trending > h1 {
+    grid-area: heading;
+  }
+
+  @media (min-width: 768px) {
+    .grid-container-trending {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5rem) minmax(0, 1fr) minmax(
+          1.5rem,
+          1fr
+        );
+      grid-template-rows: max-content 1fr;
+      grid-template-areas:
+        '. heading .'
+        '. content content';
+    }
+  }
+
+  @media (min-width: 1020px) {
+    .grid-container-trending {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(1.5rem, 1fr);
+      grid-template-rows: max-content 1fr;
+      grid-template-areas:
+        ' heading .'
+        ' content content';
+    }
   }
 }
 
@@ -138,6 +189,7 @@
   .heading-sm {
     color: #fff;
     font-size: 0.875rem;
+    font-weight: 500;
   }
 
   .text-primary {
@@ -146,7 +198,7 @@
     opacity: 0.75;
   }
 
-  @media screen and (md) {
+  @media (min-width: 768px) {
     .heading-lg {
       font-size: 2rem;
       letter-spacing: -0.5px;

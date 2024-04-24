@@ -4,12 +4,15 @@ export default {
   theme: {
     extend: {
       screens: {
+        xs: '540px',
         sm: '640px',
         md: '768px',
         lg: '1024px',
         xl: '1280px',
         '2xl': '1440px',
         '3xl': '1536px',
+        '4xl': '1920px',
+        '5xl': '2560px',
       },
       colors: {
         red: 'hsl(0, 97%, 63%)',
@@ -26,7 +29,10 @@ export default {
       container: {
         center: true,
       },
+      gridTemplateColumns: {
+        custom: 'minmax(min-content, 96px) 1fr',
+      },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 };

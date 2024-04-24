@@ -1,8 +1,17 @@
 import { auth } from '@/lib/firebase/firebase';
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  OAuthProvider,
+} from 'firebase/auth';
 import googleIcon from '@/assets/icon-google.svg';
 import githubIcon from '@/assets/icon-github.png';
+import microsoftIcon from '@/assets/icon-microsoft.png';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { setDoc, doc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase/firebase';
+import { setPersistence, browserSessionPersistence } from 'firebase/auth';
 
 function OAuth() {
   const location = useLocation();
@@ -10,17 +19,50 @@ function OAuth() {
 
   async function onGoogleClick() {
     try {
+      await setPersistence(auth, browserSessionPersistence);
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
       console.log(result);
+
+      const docRef = doc(db, 'users', user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (!docSnap.exists()) {
+        await setDoc(doc(db, 'users', user.uid), {
+          username: '',
+          email: user.email,
+          location: '',
+          savedMovies: [],
+          savedShows: [],
+        });
+      }
       navigate('/');
     } catch (error) {
       console.log(error);
     }
   }
 
-  function onGithubClick() {
+  async function onGithubClick() {
     try {
+      const provider = new GithubAuthProvider();
+
+      const result = await signInWithPopup(auth, provider);
+
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function onMicrosoftClick() {
+    try {
+      const provider = new OAuthProvider('microsoft.com');
+
+      const result = await signInWithPopup(auth, provider);
+
+      navigate('/');
     } catch (error) {
       console.log(error);
     }
@@ -45,6 +87,12 @@ function OAuth() {
           className="bg-white w-[3.25rem] h-[3.25rem] grid place-items-center my-4 rounded-full cursor-pointer "
         >
           <img src={githubIcon} alt="github-icon" />
+        </div>
+        <div
+          onClick={onMicrosoftClick}
+          className="bg-white w-12 h-12 grid place-items-center my-4 rounded-full cursor-pointer "
+        >
+          <img src={microsoftIcon} alt="github-icon" className="w-6" />
         </div>
       </div>
     </div>

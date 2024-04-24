@@ -6,7 +6,9 @@ import { useState } from 'react';
 import OAuth from '@/components/shared/auth/OAuth';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import Spinner from '@/assets/spinner.svg?react';
-import { useAuth } from '@/hooks/useAuth';
+import useAuth from '@/hooks/useAuth';
+import { setDoc, doc } from 'firebase/firestore';
+import { db } from '@/lib/firebase/firebase';
 
 function SignUp() {
   interface FormData {
@@ -105,6 +107,21 @@ function SignUp() {
       setSubmitted(true);
       const userCredential = await signUp(email, password);
       const user = userCredential.user;
+
+      // Create a Firestore document for the user
+
+      console.log('About to call setDoc', user.uid, user.email);
+
+      const docRef = doc(db, 'users', user.uid);
+      await setDoc(docRef, {
+        username: '',
+        email: user.email,
+        location: '',
+        savedMovies: [],
+        savedShows: [],
+      });
+
+      console.log('Finished calling setDoc');
 
       console.log(user);
     } else {
