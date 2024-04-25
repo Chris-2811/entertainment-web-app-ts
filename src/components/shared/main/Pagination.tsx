@@ -33,10 +33,8 @@ function Pagination({ item }: any) {
     }
   }
 
-  console.log(item.total_pages);
-
   return (
-    <div className="container flex items-center gap-6 pb-12">
+    <div className="container flex items-center gap-6 pb-8 md:pb-12">
       <Button
         onClick={handlePrevClick}
         className="w-20"

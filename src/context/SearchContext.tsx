@@ -56,10 +56,21 @@ export const SearchContextProvider = ({ children }: SearchContextProps) => {
     if (endpoint === 'multi') {
       setSearchData(data);
     } else if (endpoint === 'movie') {
-      setMovieData(data);
+      const moviesWithMediaType = data.results.map((movie: any) => {
+        return { ...movie, media_type: 'movie' };
+      });
+
+      const newData = {
+        ...data,
+        results: moviesWithMediaType,
+      };
+
+      setMovieData(newData);
     } else if (endpoint === 'tv') {
       setShowData(data);
     }
+
+    console.log('The Data', data);
   }
 
   useEffect(() => {

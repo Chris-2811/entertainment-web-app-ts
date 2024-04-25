@@ -80,15 +80,24 @@ function MediaCard({ variant = 'default', item }: MediaCardProps) {
               </div>
             </div>
           ) : (
-            <img
-              src={
-                variant === 'default'
-                  ? `${IMAGE_BASE_URL}${item.poster_path}`
-                  : `${IMAGE_BASE_URL}${item.backdrop_path}`
-              }
-              alt=""
-              className="  w-full object-cover rounded-lg"
-            />
+            <div
+              className="relative w-full rounded-lg overflow-hidden"
+              style={variant === 'default' ? { paddingBottom: '150%' } : {}}
+            >
+              <img
+                src={
+                  variant === 'default'
+                    ? `${IMAGE_BASE_URL}${item.poster_path}`
+                    : `${IMAGE_BASE_URL}${item.backdrop_path}`
+                }
+                alt=""
+                className={
+                  variant === 'default'
+                    ? 'absolute top-0 left-0 w-full h-full object-cover'
+                    : 'w-full h-full object-cover'
+                }
+              />
+            </div>
           )}
           <div className="absolute inset-0 bg-black/50 z-10 hidden group-hover/overlay:block"></div>
         </Link>

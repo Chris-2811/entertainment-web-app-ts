@@ -131,7 +131,7 @@ function SignUp() {
   }
 
   return (
-    <div className="container mt-12 md:mt-20 lg:mt-[4.875rem]">
+    <div className="container mt-8 md:mt-20 lg:mt-[4.875rem]">
       <Link to="/">
         <img src={movieIcon} alt="" className="mx-auto" />
       </Link>
@@ -221,7 +221,7 @@ function SignUp() {
           <div className="mt-5 md:mt-6">
             <OAuth />
           </div>
-          <p className="text-[0.9375rem] text-center mt-6">
+          <p className="text-[0.9375rem] text-center mt-4">
             Already have an account?
             <span className="text-red ml-2 ">
               <Link to="/log-in">Login</Link>

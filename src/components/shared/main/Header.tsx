@@ -72,7 +72,7 @@ function Header() {
           </ul>
         </nav>
         <div
-          className="w-7 h-7 grid place-items-center md:h-8 md:w-8 lg:h-10 lg:w-10 border border-white rounded-full lg:mt-auto hover:bg-white/50"
+          className="w-7 h-7 grid place-items-center md:h-8 md:w-8 lg:h-10 lg:w-10 border border-white rounded-full lg:mt-auto hover:bg-white/50 cursor-pointer"
           onClick={toggleUserMenu}
         >
           {user && !loading ? (

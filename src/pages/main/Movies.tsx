@@ -17,13 +17,20 @@ function Movies() {
         `movie/popular?api_key=${API_KEY}&language=en-US&page=1`
       );
 
-      const moviesWithMediaType = movies.map((movie: any) => {
-        return { ...movie, media_type: 'movie' };
-      });
-      setMovies(moviesWithMediaType);
+      console.log('these are the movies', movies);
+
+      if (movies) {
+        const moviesWithMediaType = movies.map((movie: any) => {
+          return { ...movie, media_type: 'movie' };
+        });
+        setMovies(moviesWithMediaType);
+      }
     };
+
     fetchData();
   }, []);
+
+  console.log(movies);
 
   return (
     <div>
