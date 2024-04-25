@@ -90,7 +90,7 @@ function MediaCard({ variant = 'default', item }: MediaCardProps) {
                     ? `${IMAGE_BASE_URL}${item.poster_path}`
                     : `${IMAGE_BASE_URL}${item.backdrop_path}`
                 }
-                alt=""
+                alt="image-poster"
                 className={
                   variant === 'default'
                     ? 'absolute top-0 left-0 w-full h-full object-cover'

@@ -13,15 +13,13 @@ function Home() {
       {searchData ? (
         <div className="mt-6">
           {
-            <>
-              <MediaGrid
-                title={`Found ${searchData.total_results} results for ${queryTerm}`}
-              >
-                {searchData?.results.map((item: any) => (
-                  <MediaCard key={item.id} item={item} />
-                ))}
-              </MediaGrid>
-            </>
+            <MediaGrid
+              title={`Found ${searchData.total_results} results for ${queryTerm}`}
+            >
+              {searchData?.results.map((item: any) => (
+                <MediaCard key={item.id} item={item} />
+              ))}
+            </MediaGrid>
           }
           <Pagination item={searchData} />
         </div>
