@@ -74,7 +74,7 @@ function OAuth() {
       <div className="flex items-center justify-center gap-3">
         <div
           onClick={onGoogleClick}
-          className="bg-white w-12 h-12 grid place-items-center my-4 rounded-full cursor-pointer "
+          className="bg-white w-12 h-12 grid place-items-center mt-[0.625rem] mb-4 rounded-full cursor-pointer "
         >
           <img
             src={googleIcon}
@@ -84,13 +84,13 @@ function OAuth() {
         </div>
         <div
           onClick={onGithubClick}
-          className="bg-white w-[3.25rem] h-[3.25rem] grid place-items-center my-4 rounded-full cursor-pointer "
+          className="bg-white w-[3.25rem] h-[3.25rem] grid place-items-center mt-[0.875rem] mb-4 rounded-full cursor-pointer "
         >
           <img src={githubIcon} alt="github-icon" />
         </div>
         <div
           onClick={onMicrosoftClick}
-          className="bg-white w-12 h-12 grid place-items-center my-4 rounded-full cursor-pointer "
+          className="bg-white w-12 h-12 grid place-items-center mt-[0.875rem] mb-4 rounded-full cursor-pointer "
         >
           <img src={microsoftIcon} alt="github-icon" className="w-6" />
         </div>

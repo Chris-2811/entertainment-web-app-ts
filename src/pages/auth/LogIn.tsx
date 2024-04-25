@@ -111,7 +111,7 @@ function LogIn() {
   }
 
   return (
-    <div className="container mt-9 md:mt-20 lg:mt-[4.875rem]">
+    <div className="container mt-8 md:mt-20 lg:mt-[4.875rem]">
       <Link to="/" className="">
         <img src={movieIcon} alt="" className="mx-auto" />
       </Link>
@@ -182,12 +182,12 @@ function LogIn() {
           <div className="mt-5 md:mt-6">
             <OAuth />
           </div>
-          <div className=" text-center text-base mt-3">
+          <div className=" text-center text-base mt-2">
             <Link to="/forgot-password" className="text-sm text-white">
               Forgot Password?
             </Link>
           </div>
-          <p className="text-[0.9375rem] text-center mt-2">
+          <p className="text-[0.9375rem] text-center mt-0.5">
             Don't have an account?
             <span className="text-red ml-2 ">
               <Link to="/sign-up">Sign Up</Link>
