@@ -11,9 +11,9 @@ function MainLayout({ children }: MainLayoutProps) {
   const location = useLocation();
 
   return (
-    <div className="lg:grid grid-cols-custom md:mt-6 lg:mt-8">
+    <div className="relative min-h-screen lg:grid grid-cols-custom md:mt-6 lg:mt-8">
       <Header />
-      <main>
+      <main className="">
         {!location.pathname.includes('/movie-details/') &&
           !location.pathname.includes('/show-details/') &&
           !location.pathname.includes('/profile') && <Searchbar />}

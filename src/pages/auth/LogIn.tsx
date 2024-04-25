@@ -111,7 +111,7 @@ function LogIn() {
   }
 
   return (
-    <div className="container mt-12 md:mt-20 lg:mt-[4.875rem]">
+    <div className="container mt-9 md:mt-20 lg:mt-[4.875rem]">
       <Link to="/" className="">
         <img src={movieIcon} alt="" className="mx-auto" />
       </Link>
