@@ -1,4 +1,3 @@
-import MoviesList from '@/components/HomePage/MoviesList';
 import MediaGrid from '@/components/shared/main/MediaGrid';
 import { useEffect } from 'react';
 import { fetchAPIData } from '@/lib/api';
@@ -17,7 +16,7 @@ function Shows() {
       const shows = await fetchAPIData(
         `tv/popular?api_key=${API_KEY}&language=en-US&page=1`
       );
-      const showsWithMediaType = shows.map((show) => {
+      const showsWithMediaType = shows.map((show: any) => {
         return { ...show, media_type: 'TV' };
       });
 
@@ -35,7 +34,7 @@ function Shows() {
           <MediaGrid
             title={`Found ${showData.total_results} results for ${queryTerm}`}
           >
-            {showData.results.map((item) => (
+            {showData.results.map((item: any) => (
               <MediaCard key={item.id} item={item} />
             ))}
           </MediaGrid>
@@ -43,7 +42,7 @@ function Shows() {
         </div>
       ) : (
         <MediaGrid title="Shows">
-          {shows.map((item) => (
+          {shows.map((item: any) => (
             <MediaCard key={item.id} item={item} />
           ))}
         </MediaGrid>

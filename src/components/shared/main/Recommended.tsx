@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEffect, useState } from 'react';
 import { fetchAPIData } from '@/lib/api';
 import { API_KEY } from '@/constants';
@@ -6,7 +5,7 @@ import MediaCard from '@/components/shared/main/MediaCard';
 import MediaGrid from './MediaGrid';
 
 function Recommended() {
-  const [totalMedia, setTotalMedia] = useState([]);
+  const [totalMedia, setTotalMedia] = useState<any[] | undefined>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +17,7 @@ function Recommended() {
         `tv/popular?api_key=${API_KEY}&language=en-US&page=1`
       );
 
-      const moviesWithMediaType = movies.map((movie) => ({
+      const moviesWithMediaType = movies.map((movie: any) => ({
         ...movie,
         media_type: 'movie',
       }));
@@ -36,9 +35,8 @@ function Recommended() {
   return (
     <div className="mt-6 lg:mt-10">
       <MediaGrid title="Recommended for you">
-        {totalMedia.map((item) => (
-          <MediaCard key={item.id} item={item} />
-        ))}
+        {totalMedia &&
+          totalMedia.map((item) => <MediaCard key={item.id} item={item} />)}
       </MediaGrid>
     </div>
   );

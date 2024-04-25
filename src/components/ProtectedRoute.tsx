@@ -1,6 +1,5 @@
-import { useContext, useEffect, ReactNode } from 'react';
+import { useEffect, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '@/context/AuthContext';
 import useAuth from '@/hooks/useAuth';
 
 interface ProtectedRouteProps {

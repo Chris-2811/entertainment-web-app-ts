@@ -1,11 +1,4 @@
-import { Search } from 'lucide-react';
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { API_KEY, BASE_URL } from '@/constants';
 
@@ -36,7 +29,6 @@ export const SearchContextProvider = ({ children }: SearchContextProps) => {
   const [showData, setShowData] = useState();
   const [queryTerm, setQueryTerm] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [endpoint, setEndpoint] = useState<string>('');
 
   const location = useLocation();
   const pathname = location.pathname;
@@ -54,8 +46,6 @@ export const SearchContextProvider = ({ children }: SearchContextProps) => {
       endpoint = 'tv';
     }
 
-    console.log(endpoint);
-
     const response = await fetch(
       `${BASE_URL}/search/${endpoint}?query=${text}&api_key=${API_KEY}&page=${page}`
     );
@@ -71,8 +61,6 @@ export const SearchContextProvider = ({ children }: SearchContextProps) => {
       setShowData(data);
     }
   }
-
-  console.log(endpoint);
 
   useEffect(() => {
     if (queryTerm !== '') {

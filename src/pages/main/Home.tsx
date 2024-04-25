@@ -4,7 +4,6 @@ import { useSearch } from '@/hooks/useSearch';
 import MediaGrid from '@/components/shared/main/MediaGrid';
 import MediaCard from '@/components/shared/main/MediaCard';
 import Pagination from '@/components/shared/main/Pagination';
-import { useEffect } from 'react';
 
 function Home() {
   const { searchData, queryTerm } = useSearch();
@@ -18,7 +17,7 @@ function Home() {
               <MediaGrid
                 title={`Found ${searchData.total_results} results for ${queryTerm}`}
               >
-                {searchData?.results.map((item) => (
+                {searchData?.results.map((item: any) => (
                   <MediaCard key={item.id} item={item} />
                 ))}
               </MediaGrid>

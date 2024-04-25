@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import MediaOverview from '@/components/shared/main/MediaOverview';
 import MediaInfo from '@/components/shared/main/MediaInfo';
 import { Button } from '@/components/ui/Button';
@@ -6,9 +6,8 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { API_KEY, BASE_URL } from '@/constants';
 
 export default function ShowDetails() {
-  const [show, setShow] = useState();
-  const [trailer, setTrailer] = useState();
-  const [link, setLink] = useState();
+  const [show, setShow] = useState<any | undefined>();
+  const [link, setLink] = useState('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const params = useParams();
   const navigate = useNavigate();
@@ -23,7 +22,7 @@ export default function ShowDetails() {
 
       const data = await response.json();
       const data2 = await response2.json();
-      const videoTrailer = data2.results.find((video) => {
+      const videoTrailer = data2.results.find((video: any) => {
         return video.type === 'Trailer';
       });
 
@@ -36,7 +35,10 @@ export default function ShowDetails() {
       console.log(videoTrailer);
 
       setShow(data);
-      setIsLoading(false);
+
+      if (data) {
+        setIsLoading(false);
+      }
     }
 
     fetchShow();

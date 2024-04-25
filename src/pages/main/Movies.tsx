@@ -1,4 +1,3 @@
-import MoviesList from '@/components/HomePage/MoviesList';
 import MediaGrid from '@/components/shared/main/MediaGrid';
 import MediaCard from '@/components/shared/main/MediaCard';
 import { useEffect } from 'react';
@@ -18,7 +17,7 @@ function Movies() {
         `movie/popular?api_key=${API_KEY}&language=en-US&page=1`
       );
 
-      const moviesWithMediaType = movies.map((movie) => {
+      const moviesWithMediaType = movies.map((movie: any) => {
         return { ...movie, media_type: 'movie' };
       });
       setMovies(moviesWithMediaType);
@@ -33,7 +32,7 @@ function Movies() {
           <MediaGrid
             title={`Found ${movieData.total_results} results for ${queryTerm} `}
           >
-            {movieData.results.map((item) => (
+            {movieData.results.map((item: any) => (
               <MediaCard key={item.id} item={item} />
             ))}
           </MediaGrid>
@@ -41,7 +40,7 @@ function Movies() {
         </div>
       ) : (
         <MediaGrid title="Movies">
-          {movies.map((item) => (
+          {movies.map((item: any) => (
             <MediaCard key={item.id} item={item} />
           ))}
         </MediaGrid>

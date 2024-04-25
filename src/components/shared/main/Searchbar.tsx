@@ -1,8 +1,6 @@
 import searchIcon from '@/assets/icon-search.svg';
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { API_KEY, BASE_URL } from '@/constants';
-import SearchContext from '@/context/SearchContext';
 import { useSearch } from '@/hooks/useSearch';
 
 function Searchbar() {
@@ -11,11 +9,11 @@ function Searchbar() {
   const location = useLocation();
   const pathname = location.pathname;
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setText(e.target.value);
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     await searchAPIData({ text });
   }

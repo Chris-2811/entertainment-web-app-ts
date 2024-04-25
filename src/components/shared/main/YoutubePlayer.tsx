@@ -1,10 +1,19 @@
 import { useRef, useState, useEffect } from 'react';
 import YouTube from 'react-youtube';
 
-function YoutubePlayer({ link, setShowPlayer, showPlayer }) {
+interface YoutubePlayerProps {
+  link: string;
+  setShowPlayer: (show: boolean) => void;
+  showPlayer: boolean;
+}
+
+function YoutubePlayer({
+  link,
+  setShowPlayer,
+  showPlayer,
+}: YoutubePlayerProps) {
   const videoId = link.split('=')[1]; // Extract video ID from link
-  const backgroundRef = useRef(null);
-  const playerRef = useRef(null);
+  const playerRef = useRef<HTMLDivElement>(null);
   const [playerSize, setPlayerSize] = useState({
     width: '100%',
     height:
@@ -43,8 +52,8 @@ function YoutubePlayer({ link, setShowPlayer, showPlayer }) {
 
     window.addEventListener('resize', handleResize);
 
-    function handleClickOutside(event) {
-      if (playerRef.current && !playerRef.current.contains(event.target)) {
+    function handleClickOutside(e: MouseEvent) {
+      if (playerRef.current && !playerRef.current.contains(e.target as Node)) {
         setShowPlayer(false);
       }
     }
@@ -56,12 +65,6 @@ function YoutubePlayer({ link, setShowPlayer, showPlayer }) {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [setShowPlayer]);
-
-  function closePlayer(e) {
-    if (e.target === backgroundRef.current) {
-      setShowPlayer(false);
-    }
-  }
 
   return (
     showPlayer && (

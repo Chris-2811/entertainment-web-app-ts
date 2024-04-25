@@ -1,4 +1,3 @@
-import React from 'react';
 import { IMAGE_BASE_URL } from '@/constants';
 import { Link } from 'react-router-dom';
 import Bookmark from './Bookmark';
@@ -21,7 +20,7 @@ function MediaCard({ variant = 'default', item }: MediaCardProps) {
     item.media_type === 'movie' ? item.release_date : item.first_air_date;
   const year = new Date(releaseDate).getFullYear();
 
-  const genres = {
+  const genres: { [key: string]: number } = {
     Action: 28,
     Adventure: 12,
     Animation: 16,
@@ -111,7 +110,7 @@ function MediaCard({ variant = 'default', item }: MediaCardProps) {
               <p>
                 {item.genre_ids &&
                   item.genre_ids
-                    .map((genre) => {
+                    .map((genre: number) => {
                       for (let key in genres) {
                         if (genres[key] === genre) {
                           return key;

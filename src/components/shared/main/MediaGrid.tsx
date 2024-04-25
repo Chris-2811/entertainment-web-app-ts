@@ -1,5 +1,4 @@
-import React from 'react';
-import MediaCard from './MediaCard';
+import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 
 interface MediaGridProps {

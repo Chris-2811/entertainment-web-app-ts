@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import MediaOverview from '@/components/shared/main/MediaOverview';
 import MediaInfo from '@/components/shared/main/MediaInfo';
 import { Button } from '@/components/ui/Button';
@@ -6,9 +6,8 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { API_KEY, BASE_URL } from '@/constants';
 
 export default function MovieDetails() {
-  const [movie, setMovie] = useState();
-  const [trailer, setTrailer] = useState();
-  const [link, setLink] = useState();
+  const [movie, setMovie] = useState<any>();
+  const [link, setLink] = useState('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const params = useParams();
   const navigate = useNavigate();
@@ -27,13 +26,11 @@ export default function MovieDetails() {
       console.log(data);
 
       const data2 = await response2.json();
-      const videoTrailer = data2.results.find((video) => {
+      const videoTrailer = data2.results.find((video: any) => {
         return video.type === 'Trailer';
       });
 
       data.media_type = 'movie';
-
-      console.log(videoTrailer);
 
       if (videoTrailer !== undefined) {
         const videoKey = videoTrailer.key;
@@ -41,10 +38,7 @@ export default function MovieDetails() {
         setLink(videoKey);
       }
 
-      /*  const dataWithMediaType = data.results.map((item) => ({
-        ...item,
-        media_type: 'movie',
-      })); */
+      console.log('Fetched data:', data);
 
       setMovie(data);
       setIsLoading(false);
@@ -58,11 +52,13 @@ export default function MovieDetails() {
   ) : (
     <div>
       <div className="absolute top-0 left-0 w-screen h-screen">
-        <img
-          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-          alt=""
-          className="h-full w-full object-cover opacity-30"
-        />
+        {movie && (
+          <img
+            src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            alt=""
+            className="h-full w-full object-cover opacity-30"
+          />
+        )}
       </div>
       <div className="relative">
         <div className="container relative z-10">

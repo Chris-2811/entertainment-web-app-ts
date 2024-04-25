@@ -48,7 +48,7 @@ function OAuth() {
     try {
       const provider = new GithubAuthProvider();
 
-      const result = await signInWithPopup(auth, provider);
+      await signInWithPopup(auth, provider);
 
       navigate('/');
     } catch (error) {
@@ -60,7 +60,7 @@ function OAuth() {
     try {
       const provider = new OAuthProvider('microsoft.com');
 
-      const result = await signInWithPopup(auth, provider);
+      await signInWithPopup(auth, provider);
 
       navigate('/');
     } catch (error) {

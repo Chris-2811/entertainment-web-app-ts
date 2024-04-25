@@ -1,18 +1,13 @@
-import React from 'react';
 import { formatMoney } from '@/lib/utils';
 
-function MediaInfo({ item }) {
-  const {
-    budget,
-    revenue,
-    runtime,
-    status,
-    number_of_seasons,
-    number_of_episodes,
-    production_companies,
-  } = item;
+type MediaInfoProps = {
+  item: any;
+};
 
-  console.log(item.media_type);
+function MediaInfo({ item }: MediaInfoProps) {
+  const { budget, revenue, runtime, status, production_companies } = item;
+
+  const { number_of_seasons, number_of_episodes } = item;
 
   return (
     <div className="mt-8">
@@ -42,7 +37,7 @@ function MediaInfo({ item }) {
           <div className="hidden md:flex items-center gap-5  ">
             <p>Production Companies:</p>
             <div className="flex items-center gap-2">
-              {production_companies.map((item, index) => (
+              {production_companies.map((item: any, index: number) => (
                 <span className="">
                   {item.name}
                   {production_companies.length >= 1 &&

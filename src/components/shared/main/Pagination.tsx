@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 import { useState } from 'react';
 import { useSearch } from '@/hooks/useSearch';
 
-function Pagination({ item }) {
+function Pagination({ item }: any) {
   const { currentPage, setCurrentPage } = useSearch();
   const [inputValue, setInputValue] = useState(currentPage);
 
@@ -19,16 +18,16 @@ function Pagination({ item }) {
     setInputValue(Number(inputValue) + 1);
   }
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const numValue = Number(e.target.value);
     if (numValue > item.total_pages) {
       e.target.value = item.total_pages;
     }
 
-    setInputValue(e.target.value);
+    setInputValue(numValue);
   }
 
-  function handleKeyDown(e) {
+  function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'Enter') {
       setCurrentPage(Number(inputValue));
     }

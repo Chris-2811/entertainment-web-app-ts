@@ -1,6 +1,3 @@
-import { release } from 'os';
-import React from 'react';
-import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/Button';
 import { FaStar } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
@@ -20,21 +17,14 @@ function MediaOverview({ item, link }: MediaOverviewProps) {
   const [showPlayer, setShowPlayer] = useState<boolean>(false);
   const location = useLocation();
 
-  console.log(link);
   const {
     poster_path,
     title,
-    backdrop_path,
     vote_average,
-    vote_count,
     release_date,
-    budget,
     genres,
-    runtime,
     overview,
     homepage,
-    revenue,
-    status,
   } = item;
 
   function truncateString(str: string, num: number) {
@@ -126,7 +116,7 @@ function MediaOverview({ item, link }: MediaOverviewProps) {
               </div>
               <div>
                 <h3 className="font-medium">Genres:</h3>
-                {genres.map((genre) => (
+                {genres.map((genre: { id: number; name: string }) => (
                   <div key={genre.id}>{genre.name}</div>
                 ))}
               </div>

@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
+import * as React from 'react';
 import bookmarkEmpty from '@/assets/icon-bookmark-empty.svg';
 import bookmarkFull from '@/assets/icon-bookmark-full.svg';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   doc,
   updateDoc,
@@ -12,7 +12,7 @@ import {
 import useAuth from '@/hooks/useAuth';
 import { db } from '@/lib/firebase/firebase';
 
-function Bookmark({ item }) {
+function Bookmark({ item }: any) {
   const [isBookmarked, setIsBookmarked] = React.useState<boolean>(false);
   const { user } = useAuth();
 
@@ -22,6 +22,10 @@ function Bookmark({ item }) {
     }
 
     const docRef = doc(db, 'users', `${user?.uid}`);
+    const releaseDate = item.release_date;
+    const releaseDateShow = item.first_air_date;
+
+    console.log(item);
 
     if (!isBookmarked) {
       if (item.media_type === 'movie') {
@@ -34,6 +38,7 @@ function Bookmark({ item }) {
               media_type: item.media_type,
               genre_ids: item.genre_ids,
               bookmarked: true,
+              release_date: releaseDate,
             }),
           });
         } catch (error) {
@@ -49,6 +54,7 @@ function Bookmark({ item }) {
             first_air_date: item.first_air_date,
             genre_ids: item.genre_ids,
             bookmarked: true,
+            release_date: releaseDateShow,
           }),
         });
       }
@@ -63,6 +69,7 @@ function Bookmark({ item }) {
               media_type: item.media_type,
               genre_ids: item.genre_ids,
               bookmarked: true,
+              release_date: releaseDate,
             }),
           });
         } catch (error) {
@@ -79,6 +86,7 @@ function Bookmark({ item }) {
               first_air_date: item.first_air_date,
               genre_ids: item.genre_ids,
               bookmarked: true,
+              release_date: releaseDateShow,
             }),
           });
         } catch (error) {
@@ -91,7 +99,6 @@ function Bookmark({ item }) {
   useEffect(() => {
     async function fetchBookmarkState() {
       const docRef = doc(db, 'users', `${user?.uid}`);
-
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -99,8 +106,8 @@ function Bookmark({ item }) {
         const savedShows = docSnap.data().savedShows || [];
 
         const isBookmarked =
-          savedMovies.some((movie) => movie.id === item.id) ||
-          savedShows.some((show) => show.id === item.id);
+          savedMovies.some((movie: any) => movie.id === item.id) ||
+          savedShows.some((show: any) => show.id === item.id);
 
         setIsBookmarked(isBookmarked);
       }
@@ -113,11 +120,11 @@ function Bookmark({ item }) {
       onClick={() => handleBookmark()}
       className=" bg-black/50 grid place-items-center rounded-full w-8 h-8"
     >
-      {isBookmarked ? (
-        <img src={bookmarkFull} alt="Bookmark" />
-      ) : (
-        <img src={bookmarkEmpty} alt="Bookmark" />
-      )}
+      <img
+        className="bookmark"
+        src={isBookmarked ? bookmarkFull : bookmarkEmpty}
+        alt={isBookmarked ? 'bookmark-full' : 'bookmark-empty'}
+      />
     </div>
   );
 }

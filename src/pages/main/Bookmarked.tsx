@@ -28,6 +28,8 @@ function Bookmarked() {
     fetchBookmarkedData();
   }, []);
 
+  console.log(bookmarkedMovies);
+
   return (
     <div>
       {bookmarkedMovies.length > 0 && (
@@ -35,7 +37,7 @@ function Bookmarked() {
           title="Bookmarked Movies"
           marginBottom="mb-6 md:mb-12 lg:mb-10"
         >
-          {bookmarkedMovies.map((item) => (
+          {bookmarkedMovies.map((item: any) => (
             <MediaCard key={item.id} item={item} />
           ))}
         </MediaGrid>
@@ -43,7 +45,7 @@ function Bookmarked() {
 
       {bookmarkedShows.length > 0 && (
         <MediaGrid title="Bookmarked TV Series">
-          {bookmarkedShows.map((item) => (
+          {bookmarkedShows.map((item: any) => (
             <MediaCard key={item.id} item={item} />
           ))}
         </MediaGrid>

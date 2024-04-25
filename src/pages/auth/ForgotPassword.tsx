@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState } from 'react';
 import AuthModal from '@/components/shared/auth/AuthModal';
 import { Button } from '@/components/ui/Button';
@@ -10,7 +9,7 @@ function ForgotPassword() {
   const [email, setEmail] = useState<string>('');
   const navigate = useNavigate();
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     try {

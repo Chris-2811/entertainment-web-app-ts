@@ -1,14 +1,10 @@
-import React from 'react';
 import { fetchAPIData } from '@/lib/api';
 import { useState, useEffect } from 'react';
-import { set } from 'firebase/database';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import MediaCard from '@/components/shared/main/MediaCard';
 
 function Trending() {
-  const [trendingMovies, setTrendingMovies] = useState([]);
-  const [trendingShows, setTrendingShows] = useState([]);
-  const [trendingTotal, setTrendingTotal] = useState([]);
+  const [trendingTotal, setTrendingTotal] = useState<any[]>([]);
 
   function getCardWidth() {
     const width = window.innerWidth;
@@ -24,22 +20,23 @@ function Trending() {
   function slideLeft() {
     let slider = document.getElementById('slider');
     let cardWidth = getCardWidth();
-    slider.scrollLeft -= cardWidth;
+    if (slider) {
+      slider.scrollLeft -= cardWidth;
+    }
   }
 
   function slideRight() {
     let slider = document.getElementById('slider');
     let cardWidth = getCardWidth();
-    slider.scrollLeft += cardWidth;
+    if (slider) {
+      slider.scrollLeft += cardWidth;
+    }
   }
 
   useEffect(() => {
     async function fetchData() {
       const movies = await fetchAPIData('trending/movie/day');
       const shows = await fetchAPIData('trending/tv/day');
-
-      setTrendingMovies(movies);
-      setTrendingShows(shows);
 
       const mixed = movies.concat(shows).sort(() => Math.random() - 0.5);
       const sliced = mixed.slice(0, 20);
