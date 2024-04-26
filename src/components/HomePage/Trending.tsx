@@ -49,7 +49,7 @@ function Trending() {
 
   return (
     <div className="ml-4 md:ml-6 lg:ml-9 mt-4 md:mt-[2.125rem] lg:mt-7">
-      <h1 className="heading-lg">Trending</h1>
+      <h2 className="heading-lg">Trending</h2>
       <div className="grid-container-trending mt-4 md:mt-6">
         <div className="relative group">
           <MdChevronLeft

@@ -36,7 +36,7 @@ function MediaInfo({ item }: MediaInfoProps) {
           </ul>
           <div className="hidden md:flex items-center gap-5  ">
             <p>Production Companies:</p>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               {production_companies.map((item: any, index: number) => (
                 <span className="">
                   {item.name}

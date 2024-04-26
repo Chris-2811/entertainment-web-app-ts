@@ -20,7 +20,8 @@ const MediaGrid = ({
         location.pathname !== '/' ? 'mt-4 md:mt-[1.625rem]' : ''
       }`}
     >
-      <h1 className="heading-lg">{title}</h1>
+      <h2 className="heading-lg">{title}</h2>
+
       <div className="grid mt-6 lg:mt-8 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-x-[1.875rem] md:gap-y-6 lg:gap-x-10 lg:gap-y-8 4xl:grid-cols-6 5xl:grid-cols-8">
         {children}
       </div>

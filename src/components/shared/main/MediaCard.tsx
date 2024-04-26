@@ -18,7 +18,14 @@ function MediaCard({ variant = 'default', item }: MediaCardProps) {
       : '';
   const releaseDate =
     item.media_type === 'movie' ? item.release_date : item.first_air_date;
-  const year = new Date(releaseDate).getFullYear();
+
+  let year;
+
+  if (releaseDate) {
+    year = new Date(releaseDate).getFullYear();
+  } else {
+    year = 'Unknown';
+  }
 
   const genres: { [key: string]: number } = {
     Action: 28,
@@ -129,9 +136,9 @@ function MediaCard({ variant = 'default', item }: MediaCardProps) {
                     .slice(0, 1)}
               </p>
             </div>
-            <h4 className="mt-1 heading-sm">
+            <h3 className="mt-1 heading-sm">
               {item.media_type === 'movie' ? item.title : item.name}
-            </h4>
+            </h3>
           </div>
         ) : (
           <div className="absolute bottom-4 left-4 text-white z-20">

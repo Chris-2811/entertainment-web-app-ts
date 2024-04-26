@@ -10,6 +10,7 @@ function Home() {
 
   return (
     <div className="">
+      <h1 className="sr-only">Home</h1>
       {searchData ? (
         <div className="mt-6">
           {

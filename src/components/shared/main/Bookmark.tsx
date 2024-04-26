@@ -98,18 +98,20 @@ function Bookmark({ item }: any) {
 
   useEffect(() => {
     async function fetchBookmarkState() {
-      const docRef = doc(db, 'users', `${user?.uid}`);
-      const docSnap = await getDoc(docRef);
+      if (user) {
+        const docRef = doc(db, 'users', `${user?.uid}`);
+        const docSnap = await getDoc(docRef);
 
-      if (docSnap.exists()) {
-        const savedMovies = docSnap.data().savedMovies || [];
-        const savedShows = docSnap.data().savedShows || [];
+        if (docSnap.exists()) {
+          const savedMovies = docSnap.data().savedMovies || [];
+          const savedShows = docSnap.data().savedShows || [];
 
-        const isBookmarked =
-          savedMovies.some((movie: any) => movie.id === item.id) ||
-          savedShows.some((show: any) => show.id === item.id);
+          const isBookmarked =
+            savedMovies.some((movie: any) => movie.id === item.id) ||
+            savedShows.some((show: any) => show.id === item.id);
 
-        setIsBookmarked(isBookmarked);
+          setIsBookmarked(isBookmarked);
+        }
       }
     }
     fetchBookmarkState();

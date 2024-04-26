@@ -52,7 +52,7 @@ export default function MovieDetails() {
   ) : (
     <div className="">
       <div className="absolute top-0 left-0 w-full h-full">
-        {movie && (
+        {movie && movie.backdrop_path && (
           <img
             src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
             alt=""

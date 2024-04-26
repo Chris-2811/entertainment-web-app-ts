@@ -80,12 +80,24 @@ function Header() {
           onClick={toggleUserMenu}
         >
           {user && !loading ? (
-            <NavLink to="/profile" className="block h-full w-full">
-              <img
-                src={userData.photoURL}
-                alt="avatar of user"
-                className="rounded-full h-full w-full object-center object-cover"
-              />
+            <NavLink
+              to="/profile"
+              className=" h-full w-full grid place-items-center"
+            >
+              {userData.photoURL ? (
+                <img
+                  src={userData.photoURL}
+                  alt="avatar of user"
+                  className="rounded-full h-full w-full object-center object-cover"
+                />
+              ) : (
+                <div className="mb-[3px] ">
+                  <NavLink to="/profile">
+                    <FaUser />
+                    <span className="sr-only">avatar</span>
+                  </NavLink>
+                </div>
+              )}
             </NavLink>
           ) : (
             <div className="mb-[3px] ">
