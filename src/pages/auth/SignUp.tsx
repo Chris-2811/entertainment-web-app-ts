@@ -9,6 +9,7 @@ import Spinner from '@/assets/spinner.svg?react';
 import useAuth from '@/hooks/useAuth';
 import { setDoc, doc } from 'firebase/firestore';
 import { db } from '@/lib/firebase/firebase';
+import { sendEmailVerification } from 'firebase/auth';
 
 function SignUp() {
   interface FormData {
@@ -107,6 +108,11 @@ function SignUp() {
       setSubmitted(true);
       const userCredential = await signUp(email, password);
       const user = userCredential.user;
+
+      if (user) {
+        await sendEmailVerification(user);
+        console.log('Verification email sent.');
+      }
 
       // Create a Firestore document for the user
 

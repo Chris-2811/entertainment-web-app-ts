@@ -11,7 +11,11 @@ import microsoftIcon from '@/assets/icon-microsoft.png';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { setDoc, doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase/firebase';
-import { setPersistence, browserSessionPersistence } from 'firebase/auth';
+import {
+  setPersistence,
+  browserSessionPersistence,
+  sendEmailVerification,
+} from 'firebase/auth';
 
 function OAuth() {
   const location = useLocation();
@@ -25,6 +29,11 @@ function OAuth() {
       const user = result.user;
 
       console.log(result);
+
+      if (user) {
+        await sendEmailVerification(user);
+        console.log('Verification email sent.');
+      }
 
       const docRef = doc(db, 'users', user.uid);
       const docSnap = await getDoc(docRef);
