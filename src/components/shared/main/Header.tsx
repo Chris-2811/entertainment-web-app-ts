@@ -52,21 +52,25 @@ function Header() {
             <li>
               <NavLink to="/">
                 <Home height={20} />
+                <span className="sr-only">Home</span>
               </NavLink>
             </li>
             <li>
               <NavLink to="/movies">
                 <Movies />
+                <span className="sr-only">Movies</span>
               </NavLink>
             </li>
             <li>
               <NavLink to="/shows">
                 <Shows />
+                <span className="sr-only">Shows</span>
               </NavLink>
             </li>
             <li>
               <NavLink to="/bookmarked">
                 <Bookmark />
+                <span className="sr-only">Bookmarked</span>
               </NavLink>
             </li>
           </ul>
@@ -87,6 +91,7 @@ function Header() {
             <div className="mb-[3px] ">
               <NavLink to="/profile">
                 <FaUser />
+                <span className="sr-only">avatar</span>
               </NavLink>
             </div>
           )}
