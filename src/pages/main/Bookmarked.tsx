@@ -26,7 +26,7 @@ function Bookmarked() {
     };
 
     fetchBookmarkedData();
-  }, []);
+  }, [bookmarkedMovies, bookmarkedShows]);
 
   console.log(bookmarkedMovies);
 

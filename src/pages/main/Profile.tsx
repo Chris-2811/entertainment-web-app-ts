@@ -24,6 +24,7 @@ function Profile() {
     location: '',
   });
   const [selectedFile, setSelectedFile] = useState<File | undefined>();
+  const [dataUpdated, setDataUpdated] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -41,17 +42,13 @@ function Profile() {
     };
 
     fetchData();
-  }, [user]);
-
-  console.log(profileData);
-  console.log(formData);
+  }, [user, dataUpdated]);
 
   async function handleLogout() {
     await signOut(auth);
     navigate('/');
   }
 
-  console.log(user);
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
@@ -76,6 +73,16 @@ function Profile() {
 
       await updateDoc(docRef, updatedData);
 
+      // Fetch the updated data from Firestore
+      const updatedDocSnap = await getDoc(docRef);
+
+      if (updatedDocSnap.exists()) {
+        // Update profileData with the fetched data
+        setProfileData(updatedDocSnap.data() as ProfileData);
+      }
+
+      console.log(formData);
+
       setProfileData(formData);
 
       if (selectedFile) {
@@ -88,6 +95,13 @@ function Profile() {
 
           const docRef = doc(db, 'users', user.uid);
           await setDoc(docRef, { photoURL: downloadURL }, { merge: true });
+
+          setProfileData((prevState) =>
+            prevState
+              ? { ...prevState, photoURL: downloadURL }
+              : { photoURL: downloadURL, email: '', username: '', location: '' }
+          );
+          setDataUpdated(true);
         } catch (error) {
           console.log(error);
         }
