@@ -148,10 +148,7 @@
   @media (min-width: 768px) {
     .grid-container-trending {
       display: grid;
-      grid-template-columns: minmax(0, 1.5rem) minmax(0, 1fr) minmax(
-          1.5rem,
-          1fr
-        );
+      grid-template-columns: minmax(0) minmax(0, 1fr) minmax(1.5rem, 1fr);
       grid-template-rows: max-content 1fr;
       grid-template-areas:
         '. heading .'

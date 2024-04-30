@@ -17,7 +17,7 @@ const MediaGrid = ({
   return (
     <div
       className={`container ${marginBottom} xl:px-9 4xl:px-14 ${
-        location.pathname !== '/' ? 'mt-4 xl:mt-5' : ''
+        location.pathname !== '/' ? 'mt-2 xl:mt-5' : ''
       }`}
     >
       <h2 className="heading-lg">{title}</h2>

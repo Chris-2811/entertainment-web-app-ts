@@ -24,7 +24,7 @@ function Searchbar() {
   }
 
   return (
-    <div className="container mt-[1.625rem] md:mt-[2.125rem] lg:mt-8">
+    <div className="container mt-[1.625rem] md:mt-[2.125rem] lg:mt-8 4xl:px-14">
       <form onSubmit={handleSubmit}>
         <div className="form-control flex items-start gap-5 ">
           <img src={searchIcon} alt="search-icon" className="w-6 md:w-8" />
