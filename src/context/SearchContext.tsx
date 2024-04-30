@@ -10,6 +10,7 @@ interface SearchContextValues {
   queryTerm: string;
   setCurrentPage: any;
   currentPage: number;
+  setQueryTerm: (query: string) => void;
 }
 
 interface SearchAPIDataProps {
@@ -74,13 +75,6 @@ export const SearchContextProvider = ({ children }: SearchContextProps) => {
   }
 
   useEffect(() => {
-    if (queryTerm !== '') {
-      searchAPIData({
-        text: queryTerm,
-        page: currentPage,
-      });
-    }
-
     window.scrollTo(0, 0);
   }, [currentPage, queryTerm]);
 
@@ -94,6 +88,7 @@ export const SearchContextProvider = ({ children }: SearchContextProps) => {
         queryTerm,
         currentPage,
         setCurrentPage,
+        setQueryTerm,
       }}
     >
       {children}

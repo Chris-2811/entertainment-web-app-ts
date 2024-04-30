@@ -48,12 +48,14 @@ export default function ShowDetails() {
     <p>isLoading....</p>
   ) : (
     <div>
-      <div className="absolute top-0 left-0 w-screen h-screen">
-        <img
-          src={`https://image.tmdb.org/t/p/original${show.backdrop_path}`}
-          alt=""
-          className="h-full w-full object-cover opacity-20"
-        />
+      <div className="absolute top-0 left-0 w-full h-full">
+        {show && show.backdrop_path && (
+          <img
+            src={`https://image.tmdb.org/t/p/original${show.backdrop_path}`}
+            alt=""
+            className="h-full w-full object-cover opacity-30"
+          />
+        )}
       </div>
       <div className="relative">
         <div className="container relative z-10">

@@ -5,7 +5,7 @@ import { useSearch } from '@/hooks/useSearch';
 
 function Searchbar() {
   const [text, setText] = useState<string>('');
-  const { searchAPIData } = useSearch();
+  const { searchAPIData, setQueryTerm } = useSearch();
   const location = useLocation();
   const pathname = location.pathname;
 
@@ -15,7 +15,12 @@ function Searchbar() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    await searchAPIData({ text });
+
+    if (pathname !== '/bookmarked') {
+      await searchAPIData({ text });
+    } else {
+      setQueryTerm(text);
+    }
   }
 
   return (
