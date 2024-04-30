@@ -30,7 +30,7 @@ function Searchbar() {
           <img src={searchIcon} alt="search-icon" className="w-6 md:w-8" />
           <input
             type="text"
-            className="placeholder:text-white/50 w-[440px]  text-white bg-transparent outline-none xl:text-2xl caret-red border-b pb-4 border-transparent focus:border-b-greyish-blue "
+            className="placeholder:text-white/50 w-[440px]  text-white bg-transparent outline-none md:text-2xl caret-red border-b pb-4 border-transparent focus:border-b-greyish-blue "
             placeholder={
               pathname === '/'
                 ? 'Search for Movies or TV series'
