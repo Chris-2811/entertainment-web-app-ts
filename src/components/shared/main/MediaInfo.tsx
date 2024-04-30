@@ -12,7 +12,7 @@ function MediaInfo({ item }: MediaInfoProps) {
   return (
     <div className="mt-8">
       {item.media_type === 'movie' ? (
-        <>
+        <div className="pb-[2.25rem]">
           <h2 className="heading-lg font-medium text-center lg:text-left">
             Movie Info
           </h2>
@@ -47,14 +47,14 @@ function MediaInfo({ item }: MediaInfoProps) {
               ))}
             </div>
           </div>
-        </>
+        </div>
       ) : (
-        <div>
+        <div className="pb-[2.25rem]">
           <h2 className="heading-lg font-medium text-center lg:text-left uppercase">
             TV-series Info
           </h2>
 
-          <ul className="mt-6 space-y-5 pb-[2.25rem] max-w-[940px]">
+          <ul className="mt-6 space-y-5  max-w-[940px]">
             <li className="flex items-center border-b-2 border-greyish-blue/50 pb-5">
               <p className="text-red font-medium mr-2">Number of Seasons:</p>
               <p>{number_of_seasons}</p>

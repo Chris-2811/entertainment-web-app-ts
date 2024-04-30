@@ -17,8 +17,6 @@ function Movies() {
         `movie/popular?api_key=${API_KEY}&language=en-US&page=1`
       );
 
-      console.log('these are the movies', movies);
-
       if (movies) {
         const moviesWithMediaType = movies.map((movie: any) => {
           return { ...movie, media_type: 'movie' };
@@ -29,8 +27,6 @@ function Movies() {
 
     fetchData();
   }, []);
-
-  console.log(movies);
 
   return (
     <div>

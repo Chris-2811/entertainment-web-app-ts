@@ -32,8 +32,6 @@ export default function ShowDetails() {
         setLink(videoKey);
       }
 
-      console.log(videoTrailer);
-
       setShow(data);
 
       if (data) {

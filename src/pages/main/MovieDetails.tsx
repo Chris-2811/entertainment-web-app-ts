@@ -23,7 +23,7 @@ export default function MovieDetails() {
       );
 
       const data = await response.json();
-      console.log(data);
+      data;
 
       const data2 = await response2.json();
       const videoTrailer = data2.results.find((video: any) => {
@@ -37,8 +37,6 @@ export default function MovieDetails() {
 
         setLink(videoKey);
       }
-
-      console.log('Fetched data:', data);
 
       setMovie(data);
       setIsLoading(false);

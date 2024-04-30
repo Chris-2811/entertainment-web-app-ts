@@ -111,12 +111,9 @@ function SignUp() {
 
       if (user) {
         await sendEmailVerification(user);
-        console.log('Verification email sent.');
       }
 
       // Create a Firestore document for the user
-
-      console.log('About to call setDoc', user.uid, user.email);
 
       const docRef = doc(db, 'users', user.uid);
       await setDoc(docRef, {
@@ -126,10 +123,6 @@ function SignUp() {
         savedMovies: [],
         savedShows: [],
       });
-
-      console.log('Finished calling setDoc');
-
-      console.log(user);
     } else {
       console.log('form is not valid');
       return;

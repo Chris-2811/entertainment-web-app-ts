@@ -12,8 +12,6 @@ function Bookmarked() {
   const [bookmarkedMovies, setBookmarkedMovies] = useState([]);
   const [bookmarkedShows, setBookmarkedShows] = useState([]);
 
-  console.log(queryTerm);
-
   useEffect(() => {
     const fetchBookmarkedData = async () => {
       if (user) {
@@ -33,8 +31,6 @@ function Bookmarked() {
   }, []);
 
   const totalMedia = bookmarkedMovies.concat(bookmarkedShows);
-
-  console.log(totalMedia);
 
   const filteredMedia = totalMedia
     .filter((item: any) =>

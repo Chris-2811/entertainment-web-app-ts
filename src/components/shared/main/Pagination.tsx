@@ -6,8 +6,6 @@ function Pagination({ item }: any) {
   const { currentPage, setCurrentPage } = useSearch();
   const [inputValue, setInputValue] = useState(currentPage);
 
-  console.log(inputValue);
-
   function handlePrevClick() {
     setCurrentPage(currentPage - 1);
     setInputValue(Number(inputValue) - 1);

@@ -28,8 +28,6 @@ function OAuth() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      console.log(result);
-
       if (user) {
         await sendEmailVerification(user);
         console.log('Verification email sent.');

@@ -39,8 +39,6 @@ function Header() {
     }
   }, [user]);
 
-  console.log(userData);
-
   return (
     <header className="relative bg-semi-dark-blue py-[1.125rem] md:px-6  md:mx-6 lg:ml-8 4xl:ml-12 lg:mr-0  md:py-5 md:rounded-[10px] lg:rounded-[20px] lg:px-8 lg:pt-[2.215rem] lg:pb-8 lg:min-h-[450px]  lg:h-[84vh] lg:max-h-[960px] lg:max-w-[96px]  lg:mb-10 z-10">
       <div className="container md:px-0 flex items-center justify-between lg:flex-col lg:justify-start lg:h-full">

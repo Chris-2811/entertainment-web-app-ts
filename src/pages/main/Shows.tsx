@@ -25,8 +25,6 @@ function Shows() {
     fetchData();
   }, []);
 
-  console.log(showData);
-
   return (
     <div>
       {showData ? (

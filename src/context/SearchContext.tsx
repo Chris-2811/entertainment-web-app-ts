@@ -70,8 +70,6 @@ export const SearchContextProvider = ({ children }: SearchContextProps) => {
     } else if (endpoint === 'tv') {
       setShowData(data);
     }
-
-    console.log('The Data', data);
   }
 
   useEffect(() => {

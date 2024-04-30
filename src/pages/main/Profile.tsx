@@ -81,8 +81,6 @@ function Profile() {
         setProfileData(updatedDocSnap.data() as ProfileData);
       }
 
-      console.log(formData);
-
       setProfileData(formData);
 
       if (selectedFile) {
