@@ -130,7 +130,7 @@ function SignUp() {
   }
 
   return (
-    <div className="container mt-8 md:mt-20 lg:mt-[4.875rem]">
+    <div className="container mt-8 md:mt-12 xl:mt-[4.875rem]">
       <Link to="/">
         <img src={movieIcon} alt="" className="mx-auto" />
       </Link>

@@ -4,6 +4,7 @@ import Bookmark from './Bookmark';
 import movieIcon from '@/assets/icon-category-movie.svg';
 import showIcon from '@/assets/icon-category-tv.svg';
 import { MdImageNotSupported } from 'react-icons/md';
+import { useEffect } from 'react';
 
 interface MediaCardProps {
   variant?: string;
@@ -56,6 +57,14 @@ function MediaCard({ variant = 'default', item }: MediaCardProps) {
     Talk: 10767,
     'War & Politics': 10768,
   };
+
+  useEffect(() => {
+    const image = new Image();
+    image.src =
+      variant === 'default'
+        ? `${IMAGE_BASE_URL}${item.poster_path}`
+        : `${IMAGE_BASE_URL}${item.backdrop_path}`;
+  }, [item, variant]);
 
   return (
     <div>

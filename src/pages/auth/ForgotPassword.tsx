@@ -22,7 +22,7 @@ function ForgotPassword() {
   }
 
   return (
-    <div className="container px-6 lg:px-0">
+    <div className="container px-6 lg:px-0 mt-12 xl:mt-[3.5rem]">
       <AuthModal>
         <form onSubmit={handleSubmit}>
           <h1 className="heading-lg">Forgot you Password?</h1>
