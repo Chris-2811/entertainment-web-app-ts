@@ -215,7 +215,7 @@
     }
 
     .mt-custom-auth {
-      margin-top: clamp(1.5rem, 3.11vh, 3rem);
+      margin-top: clamp(1rem, 2.25vh, 3rem);
     }
   }
 }
