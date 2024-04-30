@@ -213,5 +213,9 @@
     .text-primary {
       font-size: 0.8125rem;
     }
+
+    .mt-custom-auth {
+      margin-top: clamp(1.5rem, 3.11vh, 3rem);
+    }
   }
 }
